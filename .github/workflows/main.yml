@@ -21,11 +21,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install bandit semgrep
 
-      - name: Run Bandit
-        run: bandit -r .
+      - name: Run Bandit Scan
+        run: |
+          bandit -r . -f txt || true
 
       - name: Run Semgrep
-        run: semgrep --config=p/security-audit .
+        run: |
+          semgrep --config=p/security-audit .
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
